@@ -1,0 +1,142 @@
+@charset "UTF-8";
+.w80 {
+  width: 80px; }
+
+.w180 {
+  width: 180px; }
+
+.w240 {
+  width: 240px; }
+
+.ht40 {
+  height: 40px; }
+
+.ht60 {
+  height: 60px; }
+
+.ht120 {
+  height: 120px; }
+
+h1#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px	0px	0px	20px;
+  z-index: 10000; }
+
+.scrollbar {
+  width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  /*	IE,	Edge	対応	*/
+  scrollbar-width: none;
+  /*	Firefox	対応	*/ }
+
+.scrollbar::-webkit-scrollbar {
+  display: none; }
+
+.overflow-menu {
+  border-bottom: 1px	solid	#cccccc;
+  padding: 10px	0px;
+  margin: 10px	0px;
+  height: 60px;
+  width: 980px;
+  padding: 10px;
+  white-space: nowrap; }
+  .overflow-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+  .overflow-menu ul li {
+    float: left;
+    margin-right: 20px; }
+    .overflow-menu ul li a {
+      font-weight: bold;
+      color: #666;
+      position: relative;
+      display: inline-block;
+      text-decoration: none; }
+      .overflow-menu ul li a.active {
+        border-bottom: 2px	solid	#333; }
+        .overflow-menu ul li a.active:hover {
+          border: none; }
+      .overflow-menu ul li a::after {
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: #333;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s; }
+      .overflow-menu ul li a:hover::after {
+        bottom: -4px;
+        opacity: 1;
+        visibility: visible; }
+
+table td.links {
+  width: 180px; }
+  table td.links a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #333; }
+    table td.links a::after {
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      content: '';
+      width: 100%;
+      height: 2px;
+      background: #333;
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s; }
+    table td.links a:hover::after {
+      bottom: -4px;
+      opacity: 1;
+      visibility: visible; }
+
+.footimage {
+  background-image: url("/assets/image/img/footer.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%; }
+
+.scroll_box {
+  white-space: nowrap; }
+
+/*	スクロールの幅の設定	*/
+.scroll_box::-webkit-scrollbar {
+  width: 2px;
+  height: 2px; }
+
+/*	スクロールの背景の設定	*/
+.scroll_box::-webkit-scrollbar-track {
+  border-radius: 5px;
+  box-shadow: 0	0	4px	#aaa	inset; }
+
+/*	スクロールのつまみ部分の設定	*/
+.scroll_box::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #1959A8; }
+
+/*ファイルアップロード*/
+input#file {
+  display: none; }
+
+label.uploads {
+  padding: 10px	40px;
+  color: #ffffff;
+  background-color: #384878;
+  cursor: pointer; }
+
+/*# sourceMappingURL=base.css.map */

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIA,WAAO;EACP,UAAU,EALE,IAAI;EAMhB,KAAK,EALS,IAAI;AAOlB,YAAQ;EACR,UAAU,EATE,IAAI;EAUhB,KAAK,EATS,IAAI",
+"sources": ["scss/dummy.scss"],
+"names": [],
+"file": "dummy.css"
+}
