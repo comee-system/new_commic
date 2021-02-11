@@ -1,7 +1,8 @@
 # 環境構築
 - git clone の後に adminlte.zipをpublic/assetsフォルダに配置してください(composerで取得できたと思っていたが、できなかったため)
  
-
+## DBについて
+- マイグレーションについて、なぜか動作しなかったので、後程sqlファイルを配置する
 
 # CodeIgniter Composer Installer
 
