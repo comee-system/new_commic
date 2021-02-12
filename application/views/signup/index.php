@@ -25,6 +25,8 @@
 						</div>
 					</div>
 					</div>
+
+
 					<div class="col-12 col-md-7">
 						<div class="col-12  col-md-10">
 							<div class="card mb-4 shadow-sm">
@@ -32,46 +34,53 @@
 									<h4 class="my-0 fw-normal">comeeに登録する</h4>
 								</div>
 								<div class="card-body">
-									<form action="/signup/login_validation"  method="POST" >
+								
+									<?=form_open("../signup/login_validation");?>
+									
 									<input type="hidden" name="<?=$csrf_token_name?>" value="<?=$csrf_token_hash?>">
 									<div >
 										<label for="email">メールアドレス</label>
-										<input type="email" name="email" id="email" value="" placeholder="mail@comee.co.jp" class="form-control" />
+										<input type="text" name="email" id="email" value="" placeholder="mail@comee.co.jp" class="form-control" />
+										<div class="text-danger"><?=form_error('email'); ?></div>
 									</div>
 									<div class="mt-3">
 										<label for="password">パスワード
 										<br /><small>8文字以上の半角英数記号</small>
 										</label>
-										<input type="text" name="email" id="password" value=""  class="form-control" />
+										<input type="text" name="password" id="password" value=""  class="form-control" />
+										<div class="text-danger"><?=form_error('password'); ?></div>
 									</div>
 									<div class="mt-3">
 										<label for="username">ユーザーネーム
 										<br /><small>comeeに表示されます</small>
 										</label>
 										<input type="text" name="username" id="username" value=""  class="form-control" />
+										<div class="text-danger"><?=form_error('username'); ?></div>
+
 									</div>
 									<div class="mt-3">
 										
 										<label for="username">生年月日</label>
 										<div>
-										<div class="col-md-4 col-12 form-check-inline">
-											<input type="text" name="year" value=""  class="form-control" />&nbsp;年
+											<div class="col-md-4 col-12 form-check-inline">
+												<input type="text" name="year" value=""  class="form-control" />&nbsp;年
+											</div>
+											<div class="col-md-3 col-5 form-check-inline">
+												<select name="month" class="form-control" > 
+												<?php for($i=1;$i<=12;$i++):?>
+												<option value="<?=$i?>" ><?=$i?>月</option>
+												<?php endfor;?>
+												</select>
+											</div>
+											<div class="col-md-3 col-5 form-check-inline">
+												<select name="day" class="form-control" > 
+												<?php for($i=1;$i<=31;$i++):?>
+												<option value="<?=$i?>" ><?=$i?>日</option>
+												<?php endfor;?>
+												</select>
+											</div>
 										</div>
-										<div class="col-md-3 col-5 form-check-inline">
-											<select name="month" class="form-control" > 
-											<?php for($i=1;$i<=12;$i++):?>
-											<option value="<?=$i?>" ><?=$i?>月</option>
-											<?php endfor;?>
-											</select>
-										</div>
-										<div class="col-md-3 col-5 form-check-inline">
-											<select name="day" class="form-control" > 
-											<?php for($i=1;$i<=31;$i++):?>
-											<option value="<?=$i?>" ><?=$i?>日</option>
-											<?php endfor;?>
-											</select>
-										</div>
-										</div>
+										<div class="text-danger"><?=form_error('day'); ?></div>
 									</div>
 									<div class="text-center mt-3">
 										<?=form_checkbox('agree', 'on', FALSE);?>
@@ -95,7 +104,7 @@
 										</div>
 										</div>
 									</div>
-									</form>
+									<?=form_close();?>
 								</div>
 							</div>
 						</div>

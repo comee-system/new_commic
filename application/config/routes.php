@@ -53,6 +53,7 @@ $route['default_controller'] = 'top';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
 $route['manga/(:num)'] = 'Manga/index/$1';
 $route['creater/(:num)'] = 'Creater/index/$1';
 
