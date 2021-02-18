@@ -8,7 +8,7 @@
 		<?php $this->load->view('elements/topmenu_right'); ?>
 		<!--=============================================================================== -->
 		<section class="">
-			<div class="d-block font-weight-bold h4">COMEEに登録する</div>
+			<div class="d-block font-weight-bold h4">COMEEにログインする</div>
 				<div class="row my-3">
 					<div class="col-md-5 d-none d-md-block">
 					<div class="col col-xs-12 col-md-12">
@@ -31,12 +31,10 @@
 						<div class="col-12  col-md-10">
 							<div class="card mb-4 shadow-sm">
 								<div class="card-header">
-									<h4 class="my-0 fw-normal">comeeに登録する</h4>
+									<h4 class="my-0 fw-normal">comeeにログインする</h4>
 								</div>
 								<div class="card-body">
-									<?=form_open("../signup/login_validation");?>
-									
-									<input type="hidden" name="<?=$csrf_token_name?>" value="<?=$csrf_token_hash?>">
+									<?=form_open("/login/login_validation");?>
 									<div >
 										<label for="email">メールアドレス</label>
 										<input type="text" name="email" id="email" value="<?=$this->input->post('email')?>" placeholder="mail@comee.co.jp" class="form-control" />
@@ -44,65 +42,17 @@
 									</div>
 									<div class="mt-3">
 										<label for="password">パスワード
-										<br /><small>8文字以上の半角英数記号</small>
 										</label>
 										<input type="text" name="password" id="password" value="<?=$this->input->post('password')?>"  class="form-control" />
 										<div class="text-danger"><?=form_error('password'); ?></div>
 									</div>
-									<div class="mt-3">
-										<label for="username">ニックネーム
-										<br /><small>comeeに表示されます</small>
-										</label>
-										<input type="text" name="username" id="username" value="<?=$this->input->post('username')?>"  class="form-control" />
-										<div class="text-danger"><?=form_error('username'); ?></div>
-
-									</div>
-									<div class="mt-3">
-										
-										<label for="username">生年月日</label>
-										<div>
-											<div class="col-md-4 col-12 form-check-inline">
-												<input type="text" name="year" value="<?=$this->input->post('year')?>"  class="form-control" />&nbsp;年
-											</div>
-											<div class="col-md-3 col-5 form-check-inline">
-												<select name="month" class="form-control" > 
-												<?php 
-													for($i=1;$i<=12;$i++):
-													$sel = "";
-													if($i == $this->input->post("month")) $sel = "SELECTED";
-												?>
-												<option value="<?=$i?>" <?=$sel?> ><?=$i?>月</option>
-												<?php endfor;?>
-												</select>
-											</div>
-											<div class="col-md-3 col-5 form-check-inline">
-												<select name="day" class="form-control" > 
-												<?php 
-													for($i=1;$i<=31;$i++):
-														$sel = "";
-														if($i == $this->input->post("day")) $sel = "SELECTED";
-												?>
-												<option value="<?=$i?>" <?=$sel?> ><?=$i?>日</option>
-												<?php endfor;?>
-												</select>
-											</div>
-										</div>
-										<div class="text-danger"><?=form_error('day'); ?></div>
-									</div>
 									<div class="text-center mt-3">
-										<?php
-											$chk = FALSE;
-											if($this->input->post("agree")) $chk = TRUE;
-										?>
-										<?=form_checkbox('agree', 'on', $chk);?>
-										<a href="#" target=_blank>利用規約</a>に同意する
-										<div class="text-danger"><?=form_error('agree'); ?></div>
-										<?=br(2)?>
-										<input type="submit" name="regist" value="登録する(無料)" class="btn btn-info w-100" />
+										
+										<input type="submit" name="regist" value="ログインする" class="btn btn-info w-100" />
 									</div>
 									<hr class="mt-3" />
 									<div class="text-center mt-3">
-										<p class="font-weight-bold">ソーシャルアカウントで登録</p>
+										<p class="font-weight-bold">ソーシャルアカウントでログイン</p>
 										<div class="row">
 										<div class="col-md-6">
 										<a href="" class="btn btn-success w-100">

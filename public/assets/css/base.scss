@@ -285,7 +285,17 @@ label{
 			opacity: 0.5;
 		}
 	}
+	&.btn{
+		&.btn-secondary{
+			&.active{
+				background-color:#fffaf0 !important;
+				color:#000 !important;
+			}
+		}
+	}
 }
+
+
 
 .form-control{
 	outline: none;

@@ -4,9 +4,10 @@
 			<?php $this->load->view('modals/modalHeader'); ?>
 			<div class="modal-body">
 				<b><?=$title?></b>
-				<input type="text" name="email" class="form-control" value="" />
+				<input type="text" name="<?=$param?>" class="form-control" value="<?=$value?>" />
+				<input type="hidden" class="type" value="<?=$param?>" />
 			</div>
-			<?php $this->load->view('modals/modalFooter'); ?>
+			<?php $this->load->view('modals/modalFooter',$param); ?>
 		
 		</div>
 	</div>

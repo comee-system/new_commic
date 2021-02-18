@@ -11,7 +11,13 @@ class Signup extends CI_Controller {
 		
 		$this->load->helper('html');
 		$this->load->helper('form');
+		$this->load->model("User");
+		$this->config->load('validate');
+		$this->load->helper('url');
 		
+		$this->load->library("form_validation");
+		$this->load->library("my_form_validation");
+		$this->user = new User();
 		//ログインチェック
 		$this->loginflag = 0;
 		//メニューの表示
@@ -26,92 +32,45 @@ class Signup extends CI_Controller {
 	public function index()
 	{
 		$this->setView("index");
-		
 	}
+	/*********************
+	 * 登録処理
+	 */
 	public function login_validation(){
-		
-		$this->load->library("form_validation");
-		$this->form_validation->set_rules("email", "メール", "required|trim|valid_email"
-		,[
-			"required"=>"メールアドレスは必須です。"
-			,"valid_email"=>"メールアドレスの形式に誤りがあります。"
-		
-		]);	
-		$this->form_validation->set_rules("password", "パスワード", "required|trim|min_length[8]|callback__alpha_numeric_symbol"
-		,[
-			"required"=>"パスワードは必須です。"
-			,"min_length"=>"パスワードは8文字以上で入力してください。"
-			
-		]);	
-
-		$this->form_validation->set_rules("username", "ユーザーネーム", "required|trim"
-		,[
-			"required"=>"ユーザーネームは必須です。"
-		]);	
-
-		$this->form_validation->set_rules("year", "生年月日", "required|trim|callback__setYear"
-		,[
-			"required"=>"生年月日は必須です。"
-		]);	
-		$this->form_validation->set_rules("month", "生年月日", "required|trim|callback__setMonth"
-		,[
-			"required"=>"生年月日は必須です。"
-		]);	
-		$this->form_validation->set_rules("day", "生年月日", "required|trim|callback__setDay"
-		,[
-			"required"=>"生年月日は必須です。"
-		]);	
-		
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules($this->config->config["validate"]);
 		if($this->form_validation->run()){	//バリデーションエラーがなかった場合の処理
-
-			/*
-			echo "OK";
-			
-			echo password_hash($this->input->post("password") , PASSWORD_DEFAULT);
-			//認証サンプル
-			echo "<br />";
-			if(password_verify($this->input->post("password"),password_hash($this->input->post("password") , PASSWORD_DEFAULT))){
-				echo "認証OK";
+			//ユーザー情報仮登録
+			$uniq = uniqid("un_").time();
+			if (!$this->User->set($uniq)){
+				$this->session->set_flashdata('users', 'データの登録に失敗しました。');
+				redirect("/signup");
 			}else{
-				echo "NG";
-			}
-			exit();
-			if ($this->user_model->set_user()){
-				
-			}
-			*/
-			redirect("/signup");
-		}else{							//バリデーションエラーがあった場合の処理
+				//仮登録メール送信
+				$this->User->tempRegistUserSendMail($uniq);
 
-			echo "NG";
+				redirect(site_url('/signup/regist/'));
+			}
+		}else{							//バリデーションエラーがあった場合の処理
 			$this->setView("index");
 		}
 	}
-	//半角英数字チェック
-	public function _alpha_numeric_symbol($str){
-		if (preg_match("/^[a-zA-Z0-9]+$/",$str)) {
-			return TRUE;
-		} else {
-			$this->form_validation->set_message('_alpha_numeric_symbol', '%s [' . $str . ']は半角英数記号で入力してください。');
-			return FALSE;
-		}
+	/********
+	 * 仮登録完了
+	 */
+	public function regist(){
+		$this->setView("regist");
 	}
-	//生年月日
-	public function _setYear($year){$this->year = $year;}
-	public function _setMonth($month){$this->month = $month;}
-	public function _setDay($day){
-		$year = $this->year;
-		$month = $this->month;
-		if( !empty($year) && checkdate( $month, $day, $year ) ){
-			return TRUE;	
+	/******
+	 * 登録完了
+	 */
+	public function registuser($uqid){
+		if($uqid){
+			$this->User->registUser($uqid);
+			$this->setView("registuser");
 		}else{
-			$this->form_validation->set_message('_setDay', '生年月日に誤りがあります。');
-			return FALSE;
+			redirect(site_url('/'));
 		}
-		return false;
 	}
-
 
 	//ビューファイル表示
 	private function setView($view="index"){

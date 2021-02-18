@@ -6,10 +6,10 @@ class Top extends CI_Controller {
 	{
 		parent::__construct();
 		//ログインチェック
-		$this->loginflag = 0;
+		$this->User->loginCheck();
+		$this->loginflag = $this->User->loginflag;
 		//メニューの表示
 		$this->set['menuflag'] = true;
-		$this->load->model("Common");
 	}
 	/**
 	*	ログイン前トップ

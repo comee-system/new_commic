@@ -138,5 +138,7 @@ label.uploads {
   color: #ffffff;
   background-color: #384878;
   cursor: pointer; }
+label.btn.btn-secondary.active {
+  background-color: red; }
 
 /*# sourceMappingURL=base.css.map */

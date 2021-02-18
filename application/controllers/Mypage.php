@@ -7,18 +7,35 @@ class Mypage extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->config->load('validate');
+		$this->load->library("form_validation");
+		$this->load->library("my_form_validation");
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->load->library('session');
 		//ログインチェック
-		$this->loginflag = 1;
+		$this->User->loginCheck(1);
+		$this->loginflag = $this->User->loginflag;
 		//メニューの表示
 		$this->set['menuflag'] = false;
+		//ユーザー情報取得
+		$this->userdata = $this->User->getData();
+		$this->set["user"] = $this->userdata;
+		$this->set['pageType'] = "";
 
+	}
+	//----------------------
+	//ログアウト
+	//----------------------
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect ("/login");
 	}
 	//--------------------------
 	// マイページトップ
 	//-------------
 	public function index()
 	{
+		
 		$this->setView("index");
 		
 	}
@@ -26,12 +43,16 @@ class Mypage extends CI_Controller {
 	 * アカウント設定
 	 */
 	public function account(){
+		//生年月日
+		$this->set['birth'] = $this->User->setBirth($this->userdata->birth);
 		$this->setView("account");
 	}
 	/********************
 	 * クリエーター設定
 	 */
 	public function creater(){
+		$this->set["bunner"] = $this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->bunner;
+		$this->set["icon"] = $this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->icon;
 		$this->setView("creater");
 	}
 
@@ -77,17 +98,31 @@ class Mypage extends CI_Controller {
 
 		echo "OK";
 	}
+	/**********************
+	 * ユーザ情報編集
+	 * クリエーター情報編集
+	 */
+	public function editParams($type = ""){
+		$this->User->editParams();
+		if($type == "creater"){
+			redirect(base_url().'mypage/creater/');
+		}else{
+			redirect(base_url().'mypage/account/');
+		}
+	}
+
+
+	public function editParamAjax(){
+		$this->User->editParams();
+		exit();
+	}
 	//ビューファイル表示
 	private function setView($view="index"){
 
-		$this->set['csrf_token_name'] = $this->security->get_csrf_token_name();
-		$this->set['csrf_token_hash'] = $this->security->get_csrf_hash();
 		$this->set[ 'loginflag' ] = $this->loginflag;
 		$this->load->view('elements/header');
 		$this->load->view('mypage/'.$view,$this->set);
 		$this->load->view('elements/footer');
 	}
 
-	
-    
 }

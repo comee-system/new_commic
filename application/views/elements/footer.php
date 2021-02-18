@@ -22,5 +22,6 @@
 <script type="text/javascript" src="/assets/js/custom_select.js"></script>
 <script type="text/javascript" src="/assets/js/ts/script.js"></script>
 <script type="text/javascript" src="/assets/js/dropdown.js"></script>
+<script type="text/javascript" src="/assets/js/mypage.js"></script>
 </body>
 </html>

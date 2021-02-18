@@ -55,7 +55,6 @@
 				</div>
 				
 
-				<input type="hidden" id="token" name="<?=$csrf_token_name?>" value="<?=$csrf_token_hash;?>" />
 				<div class="col-12 mt-3">
 					<input type="submit" name="pass" value="投稿する" class="btn btn-primary w-100" />
 				</div>
