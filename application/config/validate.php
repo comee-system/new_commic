@@ -96,4 +96,19 @@ $config['editvalidate'] =
     ],
 ];
 
+//連載登録
+$config['comicvalidate'] = 
+[
+    [
+      'field' => 'title',
+      'label' => 'タイトル',
+      'rules' => [
+        'trim',
+        'required',
+      ],
+      'errors' => [
+        "required"=>"%sは必須です。"
+      ]
+    ],
+];
 

@@ -8,8 +8,10 @@ class User extends CI_Model {
       parent::__construct();
       $this->load->database();
       //$this->load->library('session');
+      $this->load->library('common');
       $this->load->library('email');
       $this->load->helper('path');
+      $this->common = new Common;
 		}
     //ログインチェック
     function loginCheck($redirect = 0){
@@ -65,7 +67,7 @@ class User extends CI_Model {
       $data = [];
       $data[ 'email'    ] = $this->input->post("email");
       $data[ 'password' ] = $this->createpassword();
-      $data[ 'nickname' ] = $this->input->post("username");
+      $data[ 'nickname' ] = $this->input->post("nickname");
       $data[ 'birth'    ] = sprintf("%04d-%02d-%02d"
                             ,$this->input->post("year")
                             ,$this->input->post("month")
@@ -156,7 +158,7 @@ class User extends CI_Model {
       }
 
       if(count($validate)) $this->form_validation->set_rules($validate);
-      if(count($validate) == 0 || $this->form_validation->run()){        
+      if(count($validate) == 0 || $this->form_validation->run()){       
         if($this->editUserData($type)){
           $this->session->set_flashdata('success','データの更新を行いました。');
         }else{
@@ -187,11 +189,11 @@ class User extends CI_Model {
       }
       //画像のアップロード
       if($type == "creater"){
-        if(!$this->upload()){
+        if(!$this->common->upload($this->config,$this->session->userdata('id'))){
           return false;
         }else{
-          $data[ 'bunner' ] = $this->filename['file'];
-          $data[ 'icon' ] = $this->filename['iconImage'];
+          if($this->common->filename['file']) $data[ 'bunner' ] = $this->common->filename['file'];
+          if($this->common->filename['iconImage']) $data[ 'icon' ] = $this->common->filename['iconImage'];
         }
       }
 			if($this->db->update($this->table, $data)){
@@ -200,44 +202,21 @@ class User extends CI_Model {
         return false;
       }
     }
-    //画像アップロード
-    public function upload(){
-      //クリエーター用フォルダ作成
-      $this->createFolder();
-      //画像保存
-      $this->filename = [];
-      if(!empty($_FILES)){
-        foreach($_FILES as $key=>$value){
-          if(!$this->saveImage($key)){
-            return false;
-          }else{
-            //登録に成功したfile名の取得
-            $filedata = $this->upload->data();
-            $this->filename[$key] = $filedata['file_name'];
-          }
-        }
-      }
-      return true;
-    }
-    public function saveImage($filename){
-      $config['upload_path'] = $this->dir;
-      $config['allowed_types'] = $this->config->config['allowed_types'];
-      $config['max_size']	= $this->config->config['max_size'];
-      $config['encrypt_name'] = true;
-      $this->load->library('upload', $config);
-      if($this->upload->do_upload($filename)){
-        return true;
-      }else{
-        return false;
-      }
-    }
-    public function createFolder(){
-        $path = set_realpath(".".$this->config->config['imagepath']);
-        $this->dir = $path.$this->session->userdata("id")."/";
-        if(!file_exists($this->dir)) mkdir($this->dir,0777,true);
-    }
+
+
     public function createpassword(){
       return password_hash($this->input->post("password") , PASSWORD_DEFAULT);
+    }
+
+    public function displayUserIcon(){
+      $icon = ($this->userdata->icon)?$this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->icon:$this->config->config['imagepath']."human.png";
+      return $icon;
+    }
+    public function displayUserBunner(){
+      
+      $bunner = ($this->userdata->bunner)?$this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->bunner:"";
+
+      return $bunner;
     }
 	}
 

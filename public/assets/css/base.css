@@ -241,15 +241,17 @@ input#announceImage {
   display: none; }
 
 div.uploadarea {
+  position: relative;
   width: 100%;
-  background-color: #333;
+  background-color: #fff;
   padding: 10px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  opacity: 0.5; }
+  opacity: 0.5;
+  border: 1px solid #ccc; }
   div.uploadarea .filter {
-    background-color: #333;
+    background-color: #fff;
     width: 100%;
     opacity: 0.5; }
   div.uploadarea label.uploads {
@@ -259,7 +261,8 @@ div.uploadarea {
     padding: 5%;
     color: #000;
     margin: 0 auto;
-    cursor: pointer; }
+    cursor: pointer;
+    z-index: 1000; }
 
 label {
   cursor: pointer; }

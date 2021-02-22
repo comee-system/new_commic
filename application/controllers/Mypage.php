@@ -45,14 +45,17 @@ class Mypage extends CI_Controller {
 	public function account(){
 		//生年月日
 		$this->set['birth'] = $this->User->setBirth($this->userdata->birth);
+		$this->set["bunner"] = $this->User->displayUserBunner();
+		$this->set["icon"] = $this->User->displayUserIcon();
 		$this->setView("account");
 	}
 	/********************
 	 * クリエーター設定
 	 */
 	public function creater(){
-		$this->set["bunner"] = $this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->bunner;
-		$this->set["icon"] = $this->config->config['imagepath'].$this->userdata->id."/".$this->userdata->icon;
+		$this->set["bunner"] = $this->User->displayUserBunner();
+		$this->set["icon"] = $this->User->displayUserIcon();
+		
 		$this->setView("creater");
 	}
 
@@ -72,7 +75,18 @@ class Mypage extends CI_Controller {
 	 * 連載をつくる
 	 */
 	public function write(){
+		$this->set['feesetting'] = $this->config->config['feeSetting'];
 		$this->setView("write");
+	}
+	/****************
+	 * 連載作成
+	 */
+	public function write_add(){
+		if($this->Comic->write()){
+			redirect(base_url().'mypage/write/'.$this->Comic->lastid);
+		}else{
+			$this->setView("write");
+		}
 	}
 
 	/**********************

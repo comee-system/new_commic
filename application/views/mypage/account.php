@@ -12,7 +12,7 @@
 		
 		<!--//モーダル表示-->
 		<section class="mb-5">
-			<div class="row uploadarea m-0 p-0 ht120" style="background-image:url('/assets/image/img/background.jpg')" id="file_creater_bunner">	
+			<div class="row uploadarea m-0  ht200" style="background-image:url('<?=$bunner?>')" id="file_creater_bunner">	
 
 			</div>
 			<?=form_open("/mypage/editParams/");?>
@@ -36,7 +36,7 @@
 			<div class="mx-auto w-100 mw1170 mt-3" >
 				<div class="row">
 					<div class="col-0 col-xl-2 p-3 text-center">
-						<img class="rounded-circle w-75 mw200" src="https://pics.prcm.jp/9959d117a414b/84627974/jpeg/84627974.jpeg" alt="Generic placeholder image " >
+						<img class="rounded-circle w-75 mw200" src="<?=$icon?>" alt="Generic placeholder image " >
 					</div>
 					<div class="col-12 col-xl-10">
 						

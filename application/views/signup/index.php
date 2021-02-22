@@ -34,6 +34,7 @@
 									<h4 class="my-0 fw-normal">comeeに登録する</h4>
 								</div>
 								<div class="card-body">
+								<?php echo validation_errors(); ?>
 									<?=form_open("../signup/login_validation");?>
 									
 									<input type="hidden" name="<?=$csrf_token_name?>" value="<?=$csrf_token_hash?>">
@@ -50,11 +51,11 @@
 										<div class="text-danger"><?=form_error('password'); ?></div>
 									</div>
 									<div class="mt-3">
-										<label for="username">ニックネーム
+										<label for="nickname">ニックネーム
 										<br /><small>comeeに表示されます</small>
 										</label>
-										<input type="text" name="username" id="username" value="<?=$this->input->post('username')?>"  class="form-control" />
-										<div class="text-danger"><?=form_error('username'); ?></div>
+										<input type="text" name="nickname" id="nickname" value="<?=$this->input->post('username')?>"  class="form-control" />
+										<div class="text-danger"><?=form_error('nickname'); ?></div>
 
 									</div>
 									<div class="mt-3">

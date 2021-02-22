@@ -38,6 +38,7 @@ class Signup extends CI_Controller {
 	 */
 	public function login_validation(){
 		$this->form_validation->set_rules($this->config->config["validate"]);
+		
 		if($this->form_validation->run()){	//バリデーションエラーがなかった場合の処理
 			//ユーザー情報仮登録
 			$uniq = uniqid("un_").time();

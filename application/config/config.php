@@ -543,3 +543,16 @@ $config['allowed_types'] = 'gif|jpg|png';
 $config['max_size']	= '2048';
 $config['max_width']  = '1024';
 $config['max_height']  = '768';
+
+//販売設定
+$config['feeSetting'] = [
+	1=>[
+		'key'=>1,
+		'value'=>"無料"
+	],
+	2=>[
+		'key'=>2,
+		'value'=>"月額"
+	],
+
+];

@@ -29,6 +29,8 @@
 						<input type="file" id="iconImage" name="iconImage" class="form-control d-none">
 					</div>
 					<div class="col-12 col-xl-10 mt-3">
+					
+						<label>ニックネーム</label>
 						<div class="input-group">
 							<input type="text" class="form-control" name="nickname" value="<?=$user->nickname?>"　/>
 						</div>

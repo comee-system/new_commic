@@ -15,6 +15,13 @@ $(function(){
         _type = "css";
         $(this).fileupload(e);
     });
+    //告知画像アップロード
+    $("#announceImage").change(function(e){
+        _id = $(this).attr("id");
+        _type = "css";
+        $(this).fileupload(e);
+    });
+
     //クリエーターアイコンアップロード
     $("#iconImage").change(function(e){
         _id = $(this).attr("id");
@@ -23,7 +30,13 @@ $(function(){
     });
 
 
-
+    //販売設定
+    $("input[name='saletype']").on("change",function(){
+        $("input[name='saletype']").next('label').removeClass("active");
+        $(this).next('label').addClass("active");
+        $("input[name='saletype']").prop('checked', false);
+        $(this).prop('checked', true);
+    });
 
     //sns連携のステータス変更
     $("input[name='sns']").on("change",function(){$(this).editFlag("sns");});
