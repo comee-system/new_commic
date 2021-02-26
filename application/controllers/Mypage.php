@@ -21,6 +21,7 @@ class Mypage extends CI_Controller {
 		$this->userdata = $this->User->getData();
 		$this->set["user"] = $this->userdata;
 		$this->set['pageType'] = "";
+		$this->set['feesetting'] = $this->config->config['feeSetting'];
 
 	}
 	//----------------------
@@ -35,7 +36,9 @@ class Mypage extends CI_Controller {
 	//-------------
 	public function index()
 	{
-		
+		//作品一覧データ取得
+		$comiclist = $this->Comiclist->getComicList();
+		$this->set[ 'comiclist' ] = $comiclist;
 		$this->setView("index");
 		
 	}
@@ -63,6 +66,8 @@ class Mypage extends CI_Controller {
 	 * 連載一覧
 	 */
 	public function serial(){
+		$comic = $this->Comic->getData();
+		$this->set['comic'] = $comic;
 		$this->setView("serial");
 	}
 	/**************
@@ -74,15 +79,22 @@ class Mypage extends CI_Controller {
 	/*********************
 	 * 連載をつくる
 	 */
-	public function write(){
-		$this->set['feesetting'] = $this->config->config['feeSetting'];
+	public function write($id=""){
+		$this->set['id'] = $id;
+		$comic = $this->Comic->getData($id);
+		$this->set['comic'] = (!empty($comic))?$comic[0]:"";
 		$this->setView("write");
 	}
+
 	/****************
 	 * 連載作成
 	 */
-	public function write_add(){
-		if($this->Comic->write()){
+	public function write_add($id=""){
+		$this->set['id'] = $id;
+		$comic = $this->Comic->getData($id);
+		$this->set['comic'] = (!empty($comic))?$comic[0]:"";
+		if($this->Comic->write($id)){
+			$this->common->resize($this->Comic->lastid,$this->userdata);
 			redirect(base_url().'mypage/write/'.$this->Comic->lastid);
 		}else{
 			$this->setView("write");
@@ -104,14 +116,45 @@ class Mypage extends CI_Controller {
 	/********************
 	 * 投稿する
 	 */
-	public function post(){
+	public function post($id = ""){
+		//連載データを取得
+		$comic = $this->Comic->getData();
 
+		$this->setPost($id);
+
+		$this->set['comic'] = $comic;
+		$this->set['id'] = $id;
 		$this->setView("post");
 	}
-	public function conf(){
-
-		echo "OK";
+	public function conf($id=""){
+		//連載データを取得
+		$comic = $this->Comic->getData();
+		$this->set['comic'] = $comic;
+		$this->set['id'] = $id;
+		if($this->Comiclist->editParams($id)){
+			
+		}else{
+			$this->setPost($id);
+			$this->setView("post");
+		}
 	}
+	public function setPost($id){
+		$comiclist[0] = [];
+		$comictag = [];
+		$comicimage = [];
+		if($this->Comiclist->checkComicsList($id)){
+			$comiclist = $this->Comiclist->getComicList($id);
+			$comictag = $this->Comictag->getData($id);
+			$comicimage = $this->Comiclist->getComicImage($id);
+		}else{
+			redirect(base_url().'mypage/');
+		}
+		$this->set['comiclist'] = $comiclist[0];
+		$this->set['comictag'] = $comictag;
+		$this->set['comicimage'] = $comicimage;
+
+	}
+
 	/**********************
 	 * ユーザ情報編集
 	 * クリエーター情報編集
@@ -128,6 +171,11 @@ class Mypage extends CI_Controller {
 
 	public function editParamAjax(){
 		$this->User->editParams();
+		exit();
+	}
+	//連載データステータス変更
+	public function serialStatusAjax(){
+		$this->Comic->editDataStatus();
 		exit();
 	}
 	//ビューファイル表示

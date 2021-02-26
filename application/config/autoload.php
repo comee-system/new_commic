@@ -132,5 +132,5 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = ['User','Comic'];
+$autoload['model'] = ['User','Comic','Comiclist','Comictag'];
 $autoload['helper'] = array('form','url','html');

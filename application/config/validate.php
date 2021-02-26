@@ -112,3 +112,29 @@ $config['comicvalidate'] =
     ],
 ];
 
+$config['comiclistvalidate'] = 
+[
+    [
+      'field' => 'comic_id',
+      'label' => '連載',
+      'rules' => [
+        'trim',
+        'required',
+      ],
+      'errors' => [
+        "required"=>"%sを選択してください。"
+      ]
+    ],
+    [
+      'field' => 'title',
+      'label' => 'タイトル',
+      'rules' => [
+        'trim',
+        'required',
+      ],
+      'errors' => [
+        "required"=>"%sを入力してください。"
+      ]
+    ],
+];
+

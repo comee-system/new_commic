@@ -365,6 +365,30 @@ div{
 	}
 }
 
+.comiclist{
+	position: relative;
+	&:hover{
+		background-color: #f0e68c;
+	}
+	label{
+		padding:5px;
+		font-size:1.2em;
+		display:block;
+		width:100%;
+		height: 100%;
+		position:absolute;
+		top:0;
+		left:0;
+
+	}
+	img{
+		height:100%;
+		position:absolute;
+		top:0;
+		left:20px;
+		height:30px;
+	}
+}
 
 
 
