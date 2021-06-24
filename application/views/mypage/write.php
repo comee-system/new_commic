@@ -21,7 +21,7 @@
 					
 					<?php
 						$headimage = "";
-						if($comic->head_image){
+						if(!empty($comic->head_image) ){
 							$headimage = $this->config->config['imagepath'].$comic->uid."/".$comic->head_image;
 						}
 					?>
@@ -38,7 +38,9 @@
 					<div class="form-group mt-3">
 						<label>連載タイトル</label> <small class="badge badge-danger">必須</small>
 						<?php
-							$title = (set_value('title'))?set_value('title'):$comic->title;
+							$title = "";
+							if(!empty($comic->title)) $title = $comic->title;
+							if(set_value('title')) $title = set_value('title');
 						?>
 						<input type="text" name="title" value="<?=$title?>" class="form-control" placeholder="連載のタイトル名を入力してください。" />
 						<span class="text-danger"><?=form_error('title')?></span>
@@ -46,7 +48,9 @@
 					<div class="form-group">
 						<label>連載の説明</label>
 						<?php
-							$explain = (set_value('explain'))?set_value('explain'):$comic->explain;
+							$explain = "";
+							if(!empty($comic->explain)) $explain = $comic->explain;
+							if(set_value('explain')) $explain = set_value('explain');
 						?>
 						<textarea class="form-control" name="explain" rows=4 placeholder="連載の説明を入力してください。"><?=$explain?></textarea>
 					</div>
@@ -57,9 +61,9 @@
 						</div>
 						<?php foreach($feesetting as $key=>$value):
 							$act = $chk = "";
-							if(set_value('explain') || $comic->sale_type):
+							if(set_value('sale_type') || !empty($comic->sale_type)):
 								if(
-									set_value('explain') == $value['key'] 
+									set_value('sale_type') == $value['key'] 
 									|| $comic->sale_type == $value['key']
 								):
 									$act="active";
@@ -82,13 +86,15 @@
 					<div class="form-group">
 						<label>販売価格</label>
 						<?php
-							$sale_price = (set_value('sale_price'))?set_value('sale_price'):$comic->sale_price;
+							$sale_price = "";
+							if(!empty($comic->sale_price)) $sale_price = $comic->sale_price;
+							if(set_value('sale_price')) $sale_price = set_value('sale_price');
 						?>
 						<input type="text" name="sale_price" value="<?=$sale_price?>" class="form-control col-md-4 col-12"/>
 					</div>
 					<?php
 						$announceimage = "";
-						if($comic->announce_image){
+						if(!empty($comic->announce_image)){
 							$announceimage = $this->config->config['imagepath'].$comic->uid."/".$comic->announce_image;
 						}
 					?>
@@ -105,7 +111,10 @@
 					<div class="form-group mt-3">
 						<label>告知文言</label>
 						<?php
-							$announce = (set_value('announce'))?set_value('announce'):$comic->announce;
+							$announce = "";
+							if(!empty($comic->announce)) $announce = $comic->announce;
+							if(set_value('announce')) $announce = set_value('announce');
+							
 						?>
 						<textarea class="form-control" name="announce" rows=4 placeholder="告知を入力してください。"><?=$announce?></textarea>
 					</div>

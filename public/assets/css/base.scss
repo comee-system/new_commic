@@ -245,11 +245,14 @@ div.uploadarea{
 	width:100%;
 	background-color:#fff;
 	padding:10px;
-	background-size:contain;
+	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 	opacity: 0.5;
 	border:1px solid #ccc;
+	&.opcity1{
+		opacity: 1.0;
+	}
 	.filter{
 		background-color: #fff;
 		width:100%;
@@ -341,6 +344,11 @@ img{
 		height:60px;
 		border-radius: 10px;
 	}
+	&.min-icon-top{
+		width:20px;
+		height:20px;
+		border-radius: 10px;
+	}
 }
 .border-bottom{
 	border-bottom:1px solid #666;
@@ -425,6 +433,9 @@ div.table{
 				width:30%;
 				height:300px;
 				border:1px solid #ccc;
+				&.no-board{
+					border:none;
+				}
 			}
 		}
 	}

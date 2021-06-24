@@ -16,8 +16,6 @@ class Comictag extends CI_Model {
       $where['comiclist_id'] = $id;
       $query = $this->db->get_where($this->table,$where)->result();
       return $query;
-    }
-   
-    
+    }    
     
   }

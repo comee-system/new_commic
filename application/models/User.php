@@ -57,8 +57,9 @@ class User extends CI_Model {
 			}
     }
 
-    function getData(){
-      $query = $this->db->get_where($this->table,["id"=>$this->session->userdata("id")]);
+    function getData($id=""){
+      if(!$id) $id = $this->session->userdata("id");
+      $query = $this->db->get_where($this->table,["id"=>$id]);
       return $query->first_row();
     }
     

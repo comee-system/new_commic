@@ -5,6 +5,7 @@ class Comic extends CI_Model {
     function __construct(){
       parent::__construct();
       $this->table = "comics";
+      $this->view_comic_users = "view_comic_users";
       $this->load->database();
       $this->load->library('session');
       $this->error = [];
@@ -18,6 +19,7 @@ class Comic extends CI_Model {
       $query = $this->db->get_where($this->table,$where)->result();
       return $query;
     }
+    
     //ステータス変更
     public function editDataStatus(){
       $data[ 'open_flag' ] = $this->input->post("open_flag");
@@ -63,6 +65,25 @@ class Comic extends CI_Model {
         return false;
       }
       
+    }
+
+    //トップページ取得
+    public function getDataList(){
+      $where = [];
+      $comics = $this->db->order_by('id','DESC')->get_where($this->view_comic_users,$where)->result();
+      
+      //足りない分の空配列を追加
+      $arr = [];
+      if(count($comics)%3 == 1){
+        $arr[] = [];
+        $arr[] = [];
+      }
+      if(count($comics)%3 == 2){
+        $arr[] = [];
+      }
+      $comicsdata = array_merge($comics,$arr);
+
+      return $comicsdata;
     }
     
     

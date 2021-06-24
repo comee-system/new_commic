@@ -7,7 +7,10 @@
 		<!-- 右上メニュー部分 -->
 		<?php $this->load->view('elements/topmenu_right'); ?>
 		<div class="row p-0 m-0">
-			<img src="https://assets.st-note.com/production/uploads/images/9382886/ddc41ac380f4fdec45a8e3c6d8275de2.png" class="top_bunner" />
+			<div class="row uploadarea m-0  ht200" style="background-image:url('<?=$bunner?>')" >	
+
+			</div>
+			
 		</div>
 		<!--=============================================================================== -->
 		<section class="m-2">
@@ -55,6 +58,7 @@
 							<?php endif?>
 						</div>
 						<div class="col-8 col-md-12 pb-2">
+							<div class="col-12  m-0  border  bg-secondary text-white"><?=$value->comic_title?></div>
 							<div class="col-12 font-weight-bold m-0 p-0"><?=$value->comiclist_title?></div>
 							<p class="h6 m-0 p-0 text-left">
 								<?=mb_substr($value->caption,0,30)?>
@@ -73,7 +77,7 @@
 						</div>
 					</div>
 					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
+						<div class="col-6"><a href="/manga/detail/<?=$value->comiclist_id?>" class="btn btn-success w-100">作品</a></div>
 						<div class="col-6"><a href="/mypage/post/<?=$value->comiclist_id?>" class="btn btn-primary w-100">編集</a></div>
 					</div>
 				</div>

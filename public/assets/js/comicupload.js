@@ -28,7 +28,7 @@ $(function(){
 console.log(files);
       //  $("#img1").html("");
         var _div = "";
-        var _num = parseInt($("#imageCount").text())+1;
+        var _num = parseInt($("#imageCount").text());
         $.each(files,function(key,val){
             var file = val;
             var reader = new FileReader();
@@ -41,13 +41,16 @@ console.log(files);
                 _div += "<input type='hidden' name='imageSort["+_num+"]' value='"+val.name+"'  />";
                 _div += "<label><input type='radio' name='cover' value='"+_num+"' "+_chk+" />表紙</label></div>";
                 $("#img1").append(_div);
+                
+                _num++;
+                $("#imageCount").text(_num);
                 };
             })(file);
             
             reader.readAsDataURL(file);
         });
 
-        $("#imageCount").text(_num);
+        
 
 
 

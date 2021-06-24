@@ -1,21 +1,21 @@
 <script>
 
-	var page = 4; //ページ数
-	var imgtype = "png"; //画像の拡張子
-	var title = "タイトル名"; //タイトル名
-	var site = "/manga/detail/1"; //サイトのURL
-	var copy = "作者名"; //作者名
-	var display = 0; //左ページ始まりは「0」、右ページ始まりは「1」
+	var page = <?=count($images)?>; //ページ数
+	var title = "<?=$detail->comiclist_title?>"; //タイトル名
+	var site = "/manga/detail/<?=$id?>"; //サイトのURL
+	var copy = "<?=$user->nickname;?>"; //作者名
+	var display = 1; //左ページ始まりは「0」、右ページ始まりは「1」
 
 	
 	$(function(){
+        var filename = "";
 		$("title,h1").text(title);
 		$(".o_button").attr("onClick", "location.href='" + site + "'");
 		$(".copy").text(copy);
-		for(var i=1; i<=page; i++){
-			$('#last_page').before('<div class="c_i"><div><img data-lazy="/assets/image/viewer/' + i + '.' + imgtype + '" src="/assets/image/viewer/load.gif"></div></div>'); 
-		}
-		
+        $(".images").each(function(key,value){
+            filename = $(this).val();
+            $('#last_page').before('<div class="c_i"><div><img data-lazy="'+filename+'" src="/assets/image/viewer/load.gif"></div></div>'); 
+        });
 		/**長すぎるからh1の方のタイトル改行したいって時var/コメントアウト解除して編集**/
 		//$("h1").html("サンプル<br>サンプル");
 			
@@ -23,7 +23,11 @@
 </script>
 </head>
 <body>
-
+<?php /*******漫画一覧 */ ?>
+<?php
+foreach($comics as $k=>$val):?>
+<input type="hidden" id="comic-<?=$k?>" value="<?=$val?>" class="images" />
+<?php endforeach;?>
 <div class="slider" dir="rtl">
         <div id="first_page"></div>
         <div id="last_page">

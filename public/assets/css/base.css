@@ -245,11 +245,13 @@ div.uploadarea {
   width: 100%;
   background-color: #fff;
   padding: 10px;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   opacity: 0.5;
   border: 1px solid #ccc; }
+  div.uploadarea.opcity1 {
+    opacity: 1.0; }
   div.uploadarea .filter {
     background-color: #fff;
     width: 100%;
@@ -310,6 +312,10 @@ img.min-icon {
   width: 60px;
   height: 60px;
   border-radius: 10px; }
+img.min-icon-top {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px; }
 
 .border-bottom {
   border-bottom: 1px solid #666; }
@@ -355,6 +361,8 @@ div.table {
       width: 30%;
       height: 300px;
       border: 1px solid #ccc; }
+      div.table div.table-row div.table-cell.no-board {
+        border: none; }
   @media (max-width: 680px) {
     div.table {
       display: table;

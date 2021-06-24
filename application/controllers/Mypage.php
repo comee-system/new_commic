@@ -39,6 +39,7 @@ class Mypage extends CI_Controller {
 		//作品一覧データ取得
 		$comiclist = $this->Comiclist->getComicList();
 		$this->set[ 'comiclist' ] = $comiclist;
+		$this->set["bunner"] = $this->User->displayUserBunner();
 		$this->setView("index");
 		
 	}
@@ -131,9 +132,11 @@ class Mypage extends CI_Controller {
 		$comic = $this->Comic->getData();
 		$this->set['comic'] = $comic;
 		$this->set['id'] = $id;
+		
 		if($this->Comiclist->editParams($id)){
 			
 		}else{
+			
 			$this->setPost($id);
 			$this->setView("post");
 		}
@@ -147,7 +150,7 @@ class Mypage extends CI_Controller {
 			$comictag = $this->Comictag->getData($id);
 			$comicimage = $this->Comiclist->getComicImage($id);
 		}else{
-			redirect(base_url().'mypage/');
+		//	redirect(base_url().'mypage/');
 		}
 		$this->set['comiclist'] = $comiclist[0];
 		$this->set['comictag'] = $comictag;

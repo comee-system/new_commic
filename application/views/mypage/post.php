@@ -110,17 +110,25 @@
 					<label for="title">タイトル</label>
 					<?php
 						$title = set_value('title');
-						if(!$title && $comiclist->comiclist_title) $title = $comiclist->comiclist_title;
+						if(!$title && isset($comiclist->comiclist_title)) $title = $comiclist->comiclist_title;
 						
 					?>
 					<input type="text" name="title" id="title" value="<?=$title?>" class="form-control" placeholder="タイトルを入力してください" />
 					<span class="text-danger"><?=form_error('title'); ?></span>
 				</div>
 				<div class="col-12 mt-3">
+					<label for="title">ふりがな</label>
+					<?php
+						$kana = set_value('kana');
+						if(!$kana && isset($comiclist->kana)) $kana = $comiclist->kana;
+					?>
+					<input type="text" name="kana" id="kana" value="<?=$kana?>" class="form-control" placeholder="ふりがなを入力してください" />
+				</div>
+				<div class="col-12 mt-3">
 					<label for="caption">キャプション</label>
 					<?php
 						$caption = set_value('caption');
-						if(!$caption && $comiclist->caption) $caption = $comiclist->caption;
+						if(!$caption && isset($comiclist->caption)) $caption = $comiclist->caption;
 					?>
 					<input type="text" name="caption" id="caption" value="<?=$caption?>" class="form-control" placeholder="見出しを入力してください" />
 				</div>
@@ -165,7 +173,7 @@
 					<label>リード文</label>
 					<?php
 						$read = set_value('read');
-						if(!$read && $comiclist->read) $read = $comiclist->read;
+						if(!$read && isset($comiclist->read)) $read = $comiclist->read;
 					?>
 					<textarea class="form-control" placeholder="紹介文を入力してください" name="read" rows="3"><?=$read?></textarea>
 				</div>

@@ -18,9 +18,9 @@ class Comiclist extends CI_Model {
       $this->form_validation->set_rules($validate);
       if($this->form_validation->run()){
         $this->db->trans_start();
-
         $data['comic_id'] = $this->input->post("comic_id");
         $data['title'   ] = $this->input->post("title");
+        $data['kana'   ] = $this->input->post("kana");
         $data['caption'   ] = $this->input->post("caption");
         $data['age'   ] = $this->input->post("age");
         $data['read'   ] = $this->input->post("read");
@@ -32,6 +32,7 @@ class Comiclist extends CI_Model {
           $this->db->insert($this->table,$data);
           $this->lastid = $this->db->insert_id();
         }
+       
         //タグの登録
         if($this->setTag($this->lastid)){
           //画像登録
@@ -66,11 +67,16 @@ class Comiclist extends CI_Model {
     }
     public function setImage($comiclist_id){
       
-     // var_dump($_REQUEST,$_FILES);
+     //var_dump($_REQUEST,$_FILES);
       $this->common->uploadcomic($this->config,$this->session->userdata('id'));
       $cover = $this->input->post("cover");
       if(!empty($this->common->filename)){
-        $num = count($this->input->post("imageSort"));
+        //$num = count($this->input->post("imageSort"));
+        //登録されている画像の数
+        $where = [];
+        $where['comiclist_id'] = $comiclist_id;
+        $imagecount = $this->db->select('count(*) as count')->get_where($this->comicimages,$where)->row();
+        $num = $imagecount->count;
         foreach($this->common->filename as $key=>$value){
           $set = [];
           $set['comiclist_id'] = $comiclist_id;
@@ -82,6 +88,20 @@ class Comiclist extends CI_Model {
         }
       }
 
+      if($cover){
+        //表紙の指定
+        //画像が選択されているときは上記if文で指定される
+        //変更するidの取得
+        $where = [];
+        $set=[];
+        $where[ 'comiclist_id' ] = $comiclist_id;
+        $set['cover'] = 0;
+        $this->db->update($this->comicimages,$set,$where);
+        $where[ 'number' ] = $cover;
+        $set['cover'] = 1;
+        $this->db->update($this->comicimages,$set,$where);
+      }
+      
       //画像並び順の指定
       $where = [];
       $where['comiclist_id'] = $comiclist_id;
@@ -92,7 +112,8 @@ class Comiclist extends CI_Model {
           $list[$value->number] = $value;
         }
       }
-      $no=1;
+
+      $no=0;
       foreach($this->input->post("imageSort") as $key=>$value){
         //変更するidの取得
         $where = [];
@@ -103,8 +124,7 @@ class Comiclist extends CI_Model {
         $this->db->update($this->comicimages,$set,$where);
         $no++;
       }
-
-
+      
       return true;
     }
     //作品一覧
@@ -135,6 +155,30 @@ class Comiclist extends CI_Model {
         return false;
       }
     }
+    //本一覧取得
+    public function getComicListToComicid($comic_id){
+      $where = [];
+      $where['comic_id'] = $comic_id;
+      $data = $this->db->get_where($this->view_comics_cover,$where)->result();
+      return $data;
+    }
 
+
+    //作品一覧
+    public function getDataList(){
+      $where = [];
+      $comics = $this->db->join('users', 'view_comics_cover.uid = users.id')->get_where($this->view_comics_cover,$where)->result();
+      //足りない分の空配列を追加
+      $arr = [];
+      if(count($comics)%3 == 1){
+        $arr[] = [];
+        $arr[] = [];
+      }
+      if(count($comics)%3 == 2){
+        $arr[] = [];
+      }
+      $comicsdata = array_merge($comics,$arr);
+      return $comicsdata;
+    }
     
   }
