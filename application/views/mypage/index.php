@@ -7,7 +7,10 @@
 		<!-- 右上メニュー部分 -->
 		<?php $this->load->view('elements/topmenu_right'); ?>
 		<div class="row p-0 m-0">
-			<img src="https://assets.st-note.com/production/uploads/images/9382886/ddc41ac380f4fdec45a8e3c6d8275de2.png" class="top_bunner" />
+			<div class="row uploadarea m-0  ht200" style="background-image:url('<?=$bunner?>')" >	
+
+			</div>
+			
 		</div>
 		<!--=============================================================================== -->
 		<section class="m-2">
@@ -42,123 +45,46 @@
 					</select>
 				</div>
 			</div>
-
+			
 			<div class="row mt-2">
+				<?php foreach($comiclist as $key=>$value):?>
 				<div class="col-12 mt-2 col-md-6 col-lg-3 card p-0 m-0 pb-space position-relative ">
 					<div class="row p-0 m-0 ">
-						<div class="col-4 col-md-12 p-2">
-							<img src="https://saisin.link/wp-content/uploads/2016/09/%E6%9D%B1%E4%BA%AC%E3%81%90%E3%83%BC%E3%82%8B%EF%BC%97.jpg" alt="" class="listImg">
+						<div class="col-4 col-md-12 p-2 text-center">
+							<?php if($value->coverimage):?>
+								<img src="<?=$this->config->config['imagepath']?><?=$value->uid?>/comic/<?=$value->coverimage?>" alt="" class="topImg">
+							<?php else:?>
+								<img src="<?=$this->config->config['imagepath']?>cover.jpg" alt="" class="topImg">
+							<?php endif?>
 						</div>
 						<div class="col-8 col-md-12 pb-2">
-							<div class="col-12 p-0  mt-0 mt-md-2">カテゴリが⼊ります</div>
-							<div class="col-12 font-weight-bold m-0 p-0">商品名が⼊ります</div>
+							<div class="col-12  m-0  border  bg-secondary text-white"><?=$value->comic_title?></div>
+							<div class="col-12 font-weight-bold m-0 p-0"><?=$value->comiclist_title?></div>
 							<p class="h6 m-0 p-0 text-left">
-							親譲りの無鉄砲で⼩供の時から損ばかりしている。...
+								<?=mb_substr($value->caption,0,30)?>
+								<?php if(mb_strlen($value->caption,"utf-8") > 30 ):?>
+								…
+								<?php endif?>
 							</p>
 							<div class="h6 m-0 p-0 mt-3">
-								<span><i class="far fa-clock"></i>2011/01/01</span>
-								<span class="ml-4"><i class="fas fa-lock-open"></i>公開中</span>
+								<span><i class="far fa-clock"></i><?=$value->dates?></span>
+								<span class="ml-4">
+									<i class="fas fa-lock-open"></i>
+									<?=$this->config->config['openflag'][$value->open_flag]?>
+								</span>
 							</div>
 							
 						</div>
 					</div>
 					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
-						<div class="col-6"><a href="#" class="btn btn-primary w-100">編集</a></div>
+						<div class="col-6"><a href="/manga/detail/<?=$value->comiclist_id?>" class="btn btn-success w-100">作品</a></div>
+						<div class="col-6"><a href="/mypage/post/<?=$value->comiclist_id?>" class="btn btn-primary w-100">編集</a></div>
 					</div>
 				</div>
-				<div class="col-12 mt-2 col-md-6 col-lg-3 card p-0 m-0 pb-space position-relative ">
-					<div class="row p-0 m-0 ">
-						<div class="col-4 col-md-12 p-2">
-							<img src="https://dosbg3xlm0x1t.cloudfront.net/images/items/9784088823911/1200/9784088823911.jpg" alt="" class="listImg">
-						</div>
-						<div class="col-8 col-md-12 pb-2">
-							<div class="col-12 p-0  mt-0 mt-md-2">カテゴリが⼊ります</div>
-							<div class="col-12 font-weight-bold m-0 p-0">商品名が⼊ります</div>
-							<p class="h6 m-0 p-0 text-left">
-							親譲りの無鉄砲で⼩供の時から損ばかりしている。...
-							</p>
-							<div class="h6 m-0 p-0 mt-3">
-								<span><i class="far fa-clock"></i>2011/01/01</span>
-								<span class="ml-4"><i class="fas fa-lock-open"></i>公開中</span>
-							</div>
-							
-						</div>
-					</div>
-					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
-						<div class="col-6"><a href="#" class="btn btn-primary w-100">編集</a></div>
-					</div>
-				</div>
-				<div class="col-12 mt-2 col-md-6 col-lg-3 card p-0 m-0 pb-space position-relative ">
-					<div class="row p-0 m-0 ">
-						<div class="col-4 col-md-12 p-2">
-							<img src="https://newstisiki.com/wp-content/uploads/2020/01/e5d68aac47cb0730a27442007a84e737.jpg" alt="" class="listImg">
-						</div>
-						<div class="col-8 col-md-12 pb-2">
-							<div class="col-12 p-0  mt-0 mt-md-2">カテゴリが⼊ります</div>
-							<div class="col-12 font-weight-bold m-0 p-0">商品名が⼊ります</div>
-							<p class="h6 m-0 p-0 text-left">
-							親譲りの無鉄砲で⼩供の時から損ばかりしている。...
-							</p>
-							<div class="h6 m-0 p-0 mt-3">
-								<span><i class="far fa-clock"></i>2011/01/01</span>
-								<span class="ml-4"><i class="fas fa-lock-open"></i>公開中</span>
-							</div>
-							
-						</div>
-					</div>
-					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
-						<div class="col-6"><a href="#" class="btn btn-primary w-100">編集</a></div>
-					</div>
-				</div>
-				<div class="col-12 mt-2 col-md-6 col-lg-3 card p-0 m-0 pb-space position-relative ">
-					<div class="row p-0 m-0 ">
-						<div class="col-4 col-md-12 p-2">
-							<img src="https://dw9to29mmj727.cloudfront.net/properties/2016/371-SeriesThumbnails_MHA__400x320.jpg" alt="" class="listImg">
-						</div>
-						<div class="col-8 col-md-12 pb-2">
-							<div class="col-12 p-0  mt-0 mt-md-2">カテゴリが⼊ります</div>
-							<div class="col-12 font-weight-bold m-0 p-0">商品名が⼊ります</div>
-							<p class="h6 m-0 p-0 text-left">
-							親譲りの無鉄砲で⼩供の時から損ばかりしている。...
-							</p>
-							<div class="h6 m-0 p-0 mt-3">
-								<span><i class="far fa-clock"></i>2011/01/01</span>
-								<span class="ml-4"><i class="fas fa-lock-open"></i>公開中</span>
-							</div>
-							
-						</div>
-					</div>
-					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
-						<div class="col-6"><a href="#" class="btn btn-primary w-100">編集</a></div>
-					</div>
-				</div>
-				<div class="col-12 mt-2 col-md-6 col-lg-3 card p-0 m-0 pb-space position-relative ">
-					<div class="row p-0 m-0 ">
-						<div class="col-4 col-md-12 p-2">
-							<img src="https://cmoa.sslcs.cdngc.net/data/image/title/title_0000129673/VOLUME/100001296730005.jpg" alt="" class="listImg">
-						</div>
-						<div class="col-8 col-md-12 pb-2">
-							<div class="col-12 p-0  mt-0 mt-md-2">カテゴリが⼊ります</div>
-							<div class="col-12 font-weight-bold m-0 p-0">商品名が⼊ります</div>
-							<p class="h6 m-0 p-0 text-left">
-							親譲りの無鉄砲で⼩供の時から損ばかりしている。...
-							</p>
-							<div class="h6 m-0 p-0 mt-3">
-								<span><i class="far fa-clock"></i>2011/01/01</span>
-								<span class="ml-4"><i class="fas fa-lock-open"></i>公開中</span>
-							</div>
-							
-						</div>
-					</div>
-					<div class="row position-absolute bottom-0 p-0 m-0 mb-2 w-100">
-						<div class="col-6"><a href="#" class="btn btn-success w-100">作品</a></div>
-						<div class="col-6"><a href="#" class="btn btn-primary w-100">編集</a></div>
-					</div>
-				</div>
+				<?php endforeach?>
+
+
+
 				
 
 			</div>

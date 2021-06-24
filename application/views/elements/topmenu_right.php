@@ -54,7 +54,7 @@
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#"><i class="fas fa-calendar-check"></i> 月額会員</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
+					<a class="dropdown-item" href="/mypage/logout"><i class="fas fa-sign-out-alt"></i> ログアウト</a>
 				</div>
 			</div>
 			<div class="mr-3">

@@ -6,10 +6,12 @@ class Top extends CI_Controller {
 	{
 		parent::__construct();
 		//ログインチェック
-		$this->loginflag = 0;
+		$this->User->loginCheck();
+		$this->loginflag = $this->User->loginflag;
 		//メニューの表示
 		$this->set['menuflag'] = true;
-		$this->load->model("Common");
+		$this->Comic = new Comic();
+		$this->ComicList = new Comiclist();
 	}
 	/**
 	*	ログイン前トップ
@@ -18,6 +20,12 @@ class Top extends CI_Controller {
 	*/
 	public function index()
 	{
+		//連載一覧取得
+		$comics = $this->Comic->getDataList();
+		//作品一覧取得
+		$comicslist = $this->ComicList->getDataList();
+		$this->set['comics'] = $comics;
+		$this->set['comicslist'] = $comicslist;
 		$this->___setView("index");
 	}
 

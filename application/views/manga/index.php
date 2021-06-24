@@ -9,9 +9,7 @@
 
 		<!--=============================================================================== -->
 		<section >
-			<div class="row p-0 m-0">
-				<img src="https://assets.st-note.com/production/uploads/images/9382886/ddc41ac380f4fdec45a8e3c6d8275de2.png" class="top_bunner" />
-			</div>
+			
 			<div class="row p-0 m-0 ">
 				<div class="col-md-7 col-12">
 					<div class="row p-0 m-0 border-bottom">

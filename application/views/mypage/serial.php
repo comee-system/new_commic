@@ -28,66 +28,39 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<div class="card mb-4 shadow-sm">
-							<div class="card-body position-relative">
-								<div class="text-center">
-									<img src="/assets/image/img/sample1.jpg" class="ht50 mw-100" />
-								</div>
-								<div class="p-2">
-									<div class="h5">閉鎖病棟</div>
-									<p><i class="fas fa-book-open"></i>
-									<small>投稿本数</small>
-									<b>32</b>
-									<small>本</small></p>
-									<div class="text-right">
-										<input type="checkbox" checked data-toggle="toggle" data-on="公開中" data-off="非公開" data-onstyle="success" data-offstyle="danger">
+					<?php foreach($comic as $key=>$value): ?>
+						<div class="col-md-3">
+							<div class="card mb-4 shadow-sm">
+								<div class="card-body position-relative">
+									<div class="text-center">
+										<?php if($value->uid ): ?>
+										<?php if($value->head_image):?>
+											<img src="<?=$this->config->config['imagepath']?><?=$value->uid?>/min_<?=$value->head_image?>" class="ht50 mw-100" />
+										<?php else:?>
+											<img src="<?=$this->config->config['imagepath']?>cover.jpg" class="ht50 mw-100" />
+										<?php endif;?>
+										<?php endif;?>
 									</div>
+									<div class="p-2">
+										<div class="h5"><?=$value->title?></div>
+										<p><i class="fas fa-book-open"></i>
+										<small>投稿本数</small>
+										<b>32</b>
+										<small>本</small></p>
+										<div class="text-right">
+										<?php 
+											$chk = "";
+											if($value->open_flag == 1) $chk = "checked";
+										?>
+											<input type="checkbox" <?=$chk?> data-toggle="toggle" data-on="公開中" data-off="非公開" data-onstyle="success" data-offstyle="danger" class="serial_open_flag"  data-target="#open_flag" id="open_flag-<?=$value->id?>" >
+										</div>
+									</div>
+									<a href="/mypage/write/<?=$value->id?>" class="w-100 btn btn btn-secondary">編集する</a>
 								</div>
-								<a href="/mypage/write/1" class="w-100 btn btn btn-secondary">編集する</a>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="card mb-4 shadow-sm">
-							<div class="card-body position-relative">
-								<div class="text-center">
-									<img src="/assets/image/img/sample2.jpg" class="ht50" />
-								</div>
-								<div class="p-2">
-									<div class="h5">アンパンマン</div>
-									<p><i class="fas fa-book-open"></i>
-									<small>投稿本数</small>
-									<b>32</b>
-									<small>本</small></p>
-									<div class="text-right">
-										<input type="checkbox"  data-toggle="toggle" data-on="公開中" data-off="非公開" data-onstyle="success" data-offstyle="danger">
-									</div>
-								</div>
-								<a href="/mypage/write/2" class="w-100 btn btn btn-secondary">編集する</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="card mb-4 shadow-sm">
-							<div class="card-body position-relative">
-								<div class="text-center">
-									<img src="/assets/image/img/sample3.jpg" class="ht50" />
-								</div>
-								<div class="p-2">
-									<div class="h5">毀滅の刃</div>
-									<p><i class="fas fa-book-open"></i>
-									<small>投稿本数</small>
-									<b>32</b>
-									<small>本</small></p>
-									<div class="text-right">
-										<input type="checkbox"  data-toggle="toggle" data-on="公開中" data-off="非公開" data-onstyle="success" data-offstyle="danger">
-									</div>
-								</div>
-								<a href="/mypage/write/3" class="w-100 btn btn btn-secondary">編集する</a>
-							</div>
-						</div>
-					</div>
+
+					<?php endforeach?>
 					
 				</div>
 			</div>

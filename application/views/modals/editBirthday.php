@@ -8,15 +8,21 @@
 
 					<div class="form-check form-check-inline">
 						
-						<input type="text" name="year" value="" class="form-control" />年 
+						<input type="text" name="year" value="<?=$y?>" class="form-control" />年 
 						<select name="month" class="form-control">
-							<?php for($i=1;$i<=12;$i++):?>
-								<option value="<?=$i?>"><?=$i?>月</option>
+							<?php for($i=1;$i<=12;$i++):
+								$sel = "";
+								if($i == (int)$m) $sel = "SELECTED";
+								?>
+								<option value="<?=$i?>" <?=$sel?> ><?=$i?>月</option>
 							<?php endfor;?>
 						</select>
 						<select name="day" class="form-control">
-							<?php for($i=1;$i<=31;$i++):?>
-								<option value="<?=$i?>"><?=$i?>月</option>
+							<?php for($i=1;$i<=31;$i++):
+									$sel = "";
+									if($i == (int)$d) $sel = "SELECTED";
+							?>
+								<option value="<?=$i?>" <?=$sel?> ><?=$i?>月</option>
 							<?php endfor;?>
 						</select>
 					</div>
