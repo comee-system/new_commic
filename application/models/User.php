@@ -94,30 +94,24 @@ class User extends CI_Model {
 
 このメールは会員手続きをされたユーザ様にお送りさせていただいております。
 下記URLより会員登録の完了をお願いいたします。
+
+
 ".$url.$uniq."
 
 				";
-				
 
-				$this->email->initialize(array(
-					'protocol' => 'smtp',
-					'smtp_host' => 'smtp.gmail.com',
-					'smtp_user' => 'chiba00807@gmail.com',
-					'smtp_pass' => 'takahiro1234',
-					'smtp_port' => 587,
-					'crlf' => "\r\n",
-					'newline' => "\r\n"
-				));
-
-				$this->email->from('your@example.com', 'Your Name');
-				$this->email->to($to);
-				$this->email->subject($title);
-				$this->email->message($body);
-				$this->email->send();
+        $this->load->library('email');
+        $this->email->from(D_ADMIN_MAIL, D_ADMIN_NAME);
+        $this->email->to($to);
+        //$this->email->cc('another@another-example.com');
+        //$this->email->bcc('them@their-example.com');
+        $this->email->subject($title);
+        $this->email->message($body);
+        $this->email->send();
 
 //				echo $this->email->print_debugger();
 
-				log_message('debug', 'デバックメッセージ');
+				log_message('debug', '会員仮登録');
 				log_message('debug', $body);
 
     }

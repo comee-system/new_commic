@@ -536,7 +536,6 @@ $category = array(
 );
 $config['common_menu'] = $category;
 $config[ 'timelimit' ] = 3600;
-
 //画像フォルダ
 $config['imagepath'] = "/assets/creater/";
 $config['allowed_types'] = 'gif|jpg|png';
@@ -574,3 +573,4 @@ $config['openflag'] = [
 	1=>"公開中",
 	0=>"非公開"
 ];
+

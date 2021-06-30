@@ -46,6 +46,7 @@ class Signup extends CI_Controller {
 				$this->session->set_flashdata('users', 'データの登録に失敗しました。');
 				redirect("/signup");
 			}else{
+				
 				//仮登録メール送信
 				$this->User->tempRegistUserSendMail($uniq);
 

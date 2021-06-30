@@ -25,7 +25,6 @@ $(function(){
         var files = e.dataTransfer.files;
         // 取得したファイルをinput[type=file]へ
         fileInput.files = files;
-console.log(files);
       //  $("#img1").html("");
         var _div = "";
         var _num = parseInt($("#imageCount").text());
@@ -36,10 +35,14 @@ console.log(files);
             reader.onload = (function(file){
                 return function(e){
                 var _chk = "";
-                if(_num == 0 ) _chk="checked"; 
-                _div = "<div class='col-3'><img src='"+e.target.result+"' class='w-100' />";
+                if(_num == 0 ){
+                    _chk="checked";
+                }
+                _div = "<div class='col-3  checkareabox'><img src='"+e.target.result+"' class='w-100' />";
                 _div += "<input type='hidden' name='imageSort["+_num+"]' value='"+val.name+"'  />";
-                _div += "<label><input type='radio' name='cover' value='"+_num+"' "+_chk+" />表紙</label></div>";
+                _div += "<input type='radio' id='label-"+_num+"' name='cover' value='"+_num+"' "+_chk+" />";
+                _div += "<label for='label-"+_num+"'>表紙</label>";
+                _div += "</div>";
                 $("#img1").append(_div);
                 
                 _num++;
@@ -72,6 +75,11 @@ console.log(files);
         }
     }, false);
 
+    $(document).on("click",'[name="cover"]',function(){
+
+
+        return true;
+    });
 });
 
 

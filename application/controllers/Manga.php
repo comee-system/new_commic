@@ -43,7 +43,7 @@ class Manga extends CI_Controller {
 		//一覧
 		$comiclist = $this->Comiclist->getComicListToComicid($detail->comic_id);
 		//バナー
-		$bunner = "/assets/creater/21/".$detail->head_image;
+		$bunner = "/assets/creater/".$user->id."/".$detail->head_image;
 
 		$this->set[ 'detail'    ] = $detail;
 		$this->set[ 'user'      ] = $user;

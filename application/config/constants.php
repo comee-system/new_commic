@@ -94,6 +94,8 @@ define("D_L","l_");
 define("D_M","m_");
 define("D_XS","xs_");
 
+define("D_ADMIN_MAIL","admin@commee.co.jp");
+define("D_ADMIN_NAME","comee管理者");
 
 global $g_array_type;
 $g_array_type[1] = "管理者"; 

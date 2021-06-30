@@ -33,3 +33,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /_vendor
 /public/assets/css/.sass-cache
 /public/assets/adminlte
+node_modules
+.sass-cache
+/application/config/email.php

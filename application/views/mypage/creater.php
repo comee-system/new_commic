@@ -15,8 +15,8 @@
 				<label for="file" class="uploads text-center"  >
 					ヘッダ画像の作成<br />
 					<i class=" fas fa-camera" ></i>
+					<input type="file" id="file" name="file" class="form-control">
 				</label>
-				<input type="file" id="file" name="file" class="form-control">
 			</div>
 
 			<div class="mx-auto w-100 mw1170 mt-3" >
@@ -25,8 +25,8 @@
 						<label for="iconImage" class="position-relative position-ct">
 							<i class=" fas fa-camera" ></i>
 							<img class="rounded-circle w-75 mw200" src="<?=$icon?>"  id="iconImage_creater_bunner" >
+							<input type="file" id="iconImage" name="iconImage" class="form-control">
 						</label>
-						<input type="file" id="iconImage" name="iconImage" class="form-control d-none">
 					</div>
 					<div class="col-12 col-xl-10 mt-3">
 					

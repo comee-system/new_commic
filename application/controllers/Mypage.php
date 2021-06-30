@@ -96,7 +96,7 @@ class Mypage extends CI_Controller {
 		$this->set['comic'] = (!empty($comic))?$comic[0]:"";
 		if($this->Comic->write($id)){
 			$this->common->resize($this->Comic->lastid,$this->userdata);
-			redirect(base_url().'mypage/write/'.$this->Comic->lastid);
+			redirect(base_url().'mypage/serial/');
 		}else{
 			$this->setView("write");
 		}
@@ -118,11 +118,10 @@ class Mypage extends CI_Controller {
 	 * 投稿する
 	 */
 	public function post($id = ""){
+		//連載が登録されていないときはエラーメッセージを表示する		
 		//連載データを取得
 		$comic = $this->Comic->getData();
-
 		$this->setPost($id);
-
 		$this->set['comic'] = $comic;
 		$this->set['id'] = $id;
 		$this->setView("post");

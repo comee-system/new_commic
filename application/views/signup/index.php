@@ -34,8 +34,8 @@
 									<h4 class="my-0 fw-normal">comeeに登録する</h4>
 								</div>
 								<div class="card-body">
-								<?php echo validation_errors(); ?>
-									<?=form_open("../signup/login_validation");?>
+								
+									<?= form_open("/signup/login_validation"); ?>
 									
 									<input type="hidden" name="<?=$csrf_token_name?>" value="<?=$csrf_token_hash?>">
 									<div >
@@ -95,10 +95,12 @@
 											$chk = FALSE;
 											if($this->input->post("agree")) $chk = TRUE;
 										?>
-										<?=form_checkbox('agree', 'on', $chk);?>
+										<?= form_checkbox('agree', 'on', $chk,[
+											'required'=>"requried"
+										]); ?>
 										<a href="#" target=_blank>利用規約</a>に同意する
 										<div class="text-danger"><?=form_error('agree'); ?></div>
-										<?=br(2)?>
+										<?= br(2) ?>
 										<input type="submit" name="regist" value="登録する(無料)" class="btn btn-info w-100" />
 									</div>
 									<hr class="mt-3" />
