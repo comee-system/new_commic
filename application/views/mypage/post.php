@@ -90,10 +90,10 @@
 											$chk = "";
 											if($value->cover == 1) $chk = "checked";
 											?>
-											<div class='col-3'>
-												<img src='<?=$this->config->config['imagepath']?><?=$user->id?>/comic/<?=$value->filename?>' class='w-100' />
-												<input type='hidden' name='imageSort[<?=$value->number?>]' value='<?=$value->number?>'  />
-												<label><input type='radio' <?=$chk?> name='cover' value='<?=$value->number?>' />表紙</label>
+											<div class='col-3 checkareabox'>
+												<img src='<?=$this->config->config['imagepath']?><?=$user->id?>/comic/<?= $value->filename ?>' class='w-100' />
+												<input type='hidden' name='imageSort[<?= $value->number ?>]' value='<?= $value->number ?>'  />
+												<input type='radio' <?= $chk ?> name='cover' value='<?= $value->number ?>' id='label-<?= $value->number ?>' /><label for="label-<?= $value->number ?>">表紙</label>
 											</div>
 										<?php endforeach?>
 										</div>
